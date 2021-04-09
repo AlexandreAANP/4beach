@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block metatag_description %}{% trans %}Checkout{% endtrans %} | {% trans %}Authentication{% endtrans %}{% endblock %}
+
+{% block body %}
+    {{ include('_includes/breadcrumb.html.twig', {
+        'path': [
+            {'product-cart': 'Cart'},
+            {'checkout/auth': 'Checkout Authentication'}
+        ]
+    })}}
+
+    <section>
+        <div class="container mb-0">
+            <h2 class="h1-responsive font-weight-bold text-center mt-0 mb-0">{% trans %}CHECKOUT{% endtrans %}</h2>
+            <p class="text-center w-responsive mx-auto mb-3">Authentication - Login or Signup</p>
+        </div>
+
+        <div class="container mt-0">
+            <div id="product_cart_items_loading" class="p-5 text-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+
+            <div id="product_cart_items" style="display: none">
+                {% if (product.listProductItemStock is defined) and (product.listProductItemStock|length > 0) %}
+                    <div class="row bg-light border p-2 mb-2 rounded-pill">
+                        <div class="col h5 product-cart-title-line-1 px-0 text-center">{% trans %}Image{% endtrans %}</div>
+                        <div class="col h5 product-cart-title-line-2 px-0">{% trans %}Name{% endtrans %}</div>
+                        <div class="col h5 product-cart-title-line-3 px-0 text-center">{% trans %}Price{% endtrans %}</div>
+                        <div class="col h5 product-cart-title-line-3 px-0 text-center">{% trans %}Quantity{% endtrans %}</div>
+                        <div class="col h5 product-cart-title-line-3 px-0 text-center">{% trans %}Sub total{% endtrans %}</div>
+                    </div>
+
+                    {% set productQuantity = product.productQuantity %}
+                    {% set productPriceQuantity = product.productPriceQuantity %}
+                    {% set productPrice = product.productPrice %}
+
+                    {% for key,item in product.listProductItemStock %}
+                        {% set bgcolor = key % 2 ? '#fafafa' : '#fff' %}
+
+                        <div class="row mx-0 mb-2 py-1 border rounded" style="background: {{ bgcolor }}">
+                            <div class="col product-cart-line-1 px-1 text-center align-middle my-auto"><img src="{{ item.filename }}" class="img-fluid" style="max-height: 60px"></div>
+                            <div class="col product-cart-line-2 px-1 align-middle my-auto">
+                                <div class="d-block w-100 h5">{{ item.name }}</div>
+                                {% if item.productTypeReferenceKey == 'physical-products' %}
+                                    <div class="d-block w-100">
+                                        {% trans %}Color{% endtrans %}: {{ product.productItems[item.productItemStockId].color }} | {% trans %}Size{% endtrans %}: {{ product.productItems[item.productItemStockId].size }}
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <div class="col col-3 h6 product-cart-line-0 text-center" style="display: none">{% trans %}Price{% endtrans %}</div>
+                            <div class="col col-3 h6 product-cart-line-0 text-center" style="display: none">{% trans %}Quantity{% endtrans %}</div>
+                            <div class="col col-3 h6 product-cart-line-0 text-center" style="display: none">{% trans %}Sub Total{% endtrans %}</div>
+
+                            <div class="col product-cart-line-3 text-center align-middle my-auto" style="width: 10%">
+                                {{ productPrice[item.productItemStockId] }}
+                            </div>
+                            <div class="col product-cart-line-3 text-center align-middle my-auto">
+                                {% if item.allowQuantity %}
+                                    {% if item.productTypeReferenceKey == 'physical-products' %}
+                                        {{ productQuantity[item.productItemStockId] }}
+                                    {% else %}
+                                        <button class="btn btn-outline-primary">{% trans %}Availability{% endtrans %}</button>
+                                    {% endif %}
+                                {% endif %}
+                            </div>
+                            <div class="col product-cart-line-3 text-center align-middle my-auto">
+                                {{ productPriceQuantity[item.productItemStockId] }}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                {% else %}
+                    <tbody>
+                    <tr>
+                        <td class="text-center" scope="col">
+                            <h3>{% trans %}There is no Product in Cart{% endtrans %}</h3>
+                            <a href="./" style="border:#ff5a2c solid 3px; color:#ff5a2c; background:transparent" data-loading-text="Backing" class="btn mt-2">{% trans %}Go to Product List{% endtrans %}</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                {% endif %}
+            </div>
+
+            <div class="pb-4 mb-4">
+                <div class="d-flex justify-content-end align-items-center">
+                    <a href="{{ baseUri }}/product-cart" style="border:#ff5a2c solid 3px; color:#ff5a2c; background:transparent" data-loading-text="Backing" class="btn mx-3">{% trans %}Back to Cart{% endtrans %}</a>
+
+                    <div class="p-0 ml-5">
+                        <div class="h6 p-2 text-right font-weight-bold small" style="margin-bottom:-10px; color:#ff5a2c">Total</div>
+                        <div class="h2 p-2 text-right font-weight-bold text-danger">{{ product.totalPrice }} €</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section>
+        <div class="site-module-content container">
+            <div class="row">
+                <div class="bg-light w-100 my-2 p-1 pt-2 border rounded text-center">
+                    <h5>{% trans %}To complete your payment, choose one of the options below{% endtrans %}</h5>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-5 p-2">
+                    <div class="card border-0">
+                        <div class="row">
+                            <div class="d-flex justify-content-center w-100 mt-2">
+                                <div id="checkout_auth_msg_login" class="alert alert-warning" role="alert" style="display: none; box-shadow: 0 0 2px 3px #fff; padding: 5px; border: #ccc 1px solid; border-radius: 5px; margin-bottom: 10px"></div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-3">
+                            <form id="form_login" action="/customer/login" method="POST" novalidate>
+                                <input type="hidden" name="origin" value="checkout">
+                                <div class="form-group form-title text-center">
+                                    Entre com seus dados de acesso
+                                </div>
+                                <div class="form-group">
+                                    <label for="login_email">Email:</label><BR>
+                                    <input type="text" id="login_email" name="email" placeholder="Email" autofocus class="form-control" required>
+                                    <div class="invalid-feedback">* {% trans %}Required field!{% endtrans %}</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="login_password">Password:</label><BR>
+                                    <input type="password" id="login_password" name="password" placeholder="Password" class="form-control" required>
+                                    <div class="invalid-feedback">* {% trans %}Required field!{% endtrans %}</div>
+                                </div>
+                                <div class="form-group text-center">
+                                    <a href="{{ baseUri }}/customer/recover-password" tabIndex="4">Recuperar Password</a>
+                                </div>
+                                <div class="text-center">
+                                    <input type="submit" id="form_checkout_login_submit" value="Enter" data-loading-text="{% trans %}Login{% endtrans %}" class="btn btn-primary btn-form-action">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-md-1 align-items-center">
+                    <h1 class="d-table-cell text-center align-middle">{% trans %}or{% endtrans %}</h1>
+                </div>
+
+                <div class="col-12 col-md-5 p-2">
+                    <div class="card border-0">
+                        <div class="row">
+                            <div class="d-flex justify-content-center w-100 mt-2">
+                                <div id="checkout_auth_msg_signup" class="alert alert-warning" role="alert" style="display: none; box-shadow: 0 0 2px 3px #fff; padding: 5px; border: #ccc 1px solid; border-radius: 5px; margin-bottom: 10px"></div>
+                            </div>
+                        </div>
+                        <div class="border rounded p-3">
+                            <form id="form_signup" action="/customer/signup" method="POST" novalidate>
+                                <input type="hidden" name="origin" value="checkout">
+                                <div class="form-group form-title text-center">
+                                    Primeira compra? Faça seu Registro!
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup_name">Name:</label><BR>
+                                    <input type="text" id="signup_name" name="name" placeholder="Name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup_email">Email:</label><BR>
+                                    <input type="text" id="signup_email" name="email" placeholder="Email" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup_password">Password:</label><BR>
+                                    <input type="password" id="signup_password" name="password" placeholder="Password" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signup_password_confirm">Password Confirm:</label><BR>
+                                    <input type="password" id="signup_password_confirm" name="password_confirm" placeholder="Password Confirm" class="form-control" required>
+                                </div>
+                                <div class="text-center">
+                                    <input type="submit" id="form_checkout_signup_submit" class="btn btn-primary" data-loading-text="{% trans %}Sending{% endtrans %}" value="{% trans %}Create{% endtrans %}">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            var options = {};
+            querybizCheckout.init(options);
+            querybizProduct.init(options);
+            querybizProduct.showCart('checkout/auth');
+            //querybizProduct.getProductInCart('cart');
+        });
+    </script>
+{% endblock %}

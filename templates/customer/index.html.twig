@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="site-module-name container">{% trans %}CUSTOMER{% endtrans %}</div>
+
+        <!-- start customer menu -->
+        {% from '\/customer/menu.html.twig' import customerMenuTemplate %}
+        {{ customerMenuTemplate(baseUri, app) }}
+        <!-- end customer menu -->
+
+        <div class="site-module-title container">{% trans %}Customer Area{% endtrans %}</div>
+        <div class="site-module-content container d-flex justify-content-center">
+            <div class="row w-100">
+                <div class="col-2">
+                    <div class="w-100 text-center">
+
+                        <form method="post" enctype="multipart/form-data" id="formUploadFile">
+                            <input type="hidden" name="customer" value="{{ customerId }}/profile" />
+                            <input class="d-none" type="file" id="file" name="files[]"/>
+                            <input class="d-none" id="form_upload_file_submit" type="submit">
+
+                                <!--
+                                <button id="select_file" title="Select File(s)" style="border: 0; background: transparent">
+                                    <div style="background-image: url('/assets/images/upload.webp'); background-color: transparent; background-size: 100%; width: 36px; height: 36px; border: 0; cursor: pointer; float: left"></div>
+                                    <div style="width: 94px; padding-top: 6px; height: 36px; border: 0">Upload</div>
+                                </button>-->
+
+                            <img src="{{ profilePicture }}" class="shadow p-2 w-100" style="cursor:pointer" id="select_file" title="{% trans %}Click to change your Profile Picture{% endtrans %}">
+                        </form>
+                    </div>
+
+                    <div class="d-none" style="background-color: #000; height: 10px; filter: opacity(0.5)" id="progress_bar"></div>
+                    <div class="text-center">
+                        <div id="customer_drive_msg" class="d-none d_-inline-block bg-warning p-2 rounded text-left mb-2"></div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    {% trans %}Informations{% endtrans %}: {{ customerName }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            var options = {
+                'dir': {{ customerId }},
+                'execAfterUpload': 'updateProfilePicture',
+            };
+            querybizCustomerDrive.init(options);
+        });
+    </script>
+{% endblock %}

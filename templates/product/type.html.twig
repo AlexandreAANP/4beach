@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section id="home">
+        {# INI: ESSE BLOCO PODE SER REMOVIDO, É APENAS PARA INFORMAÇÃO AO DESENVOLVEDOR #}
+        <div class="site-module-name container">PRODUCT TYPE</div>
+        <div class="site-module-content container">
+            <b>File:</b> /templates/product/type.html.twig
+        </div>
+
+        <div class="container site-dump">
+            <pre>{{ dump(colProductType) }}</pre>
+        </div>
+        {# FIM ------------------------------------------------------------------------ #}
+
+        <div class="container">
+            Escolha uma dos tipos de Produtos abaixo
+
+            <div class="row my-3">
+                <div class="col-12 p-0">
+                    {% for productType in colProductType %}
+                        <a href="{{ baseUri }}/product/{{ productType.referenceKey }}" data-loading-text="{{ productType.name }}" class="btn btn-outline-primary">{{ productType.name }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

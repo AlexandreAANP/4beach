@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+    
+{% block body %}
+<section class="row justify-content-center background-section-image">
+        {#<div class="site-module-name container">{% trans %}CUSTOMER{% endtrans %}</div>
+        <div class="site-module-title container">{% trans %}Customer Area{% endtrans %}</div>#}
+        
+            
+           <div class="row justify-content-center background-login">
+                  
+                <div class="card m-2 customer-login-card">
+                  
+                    <div class="row">
+                        <div class="d-flex justify-content-center w-100 mt-2">
+                            <div id="customer_msg_login" class="alert alert-warning" role="alert" style="display: none; box-shadow: 0 0 2px 3px #fff; padding: 5px; border: #ccc 1px solid; border-radius: 5px; margin-bottom: 10px"></div>
+                        </div>
+                    </div>
+
+                    <div class="w-100 text-center" id="customer_login_redirect" style="display: none">
+                        <div class="bg-light rounded">{% trans %}Redirecting{% endtrans %}</div>
+                    </div>
+
+                    <form id="form_login" action="{{ baseUri }}/customer/login" method="POST" novalidate>
+                            <input type="hidden" name="redirect" value="{{ redirect }}">
+                            <input type="hidden" id="g-recaptcha-response" name="g-recaptcha-response">
+                                            
+                                           {#<div class="form-group form-title text-center">
+                                                {% trans %}Type your access data{% endtrans %}
+                                            </div>#}
+                        <div class="h4 first-title-login">
+                                    Acesso do Cliente
+                        </div>
+                        <div class="h5 second-title-login">
+                                    Utilizadores Registados
+                        </div>
+                        <div class="h6 info-frase-login">
+                            Se você tiver uma conta, entre com o seu endereço de e-mail
+                        </div>   
+                                <div class="form-group">
+                                                {#<label for="email">{% trans %}Email{% endtrans %}:</label><BR>#}
+                                        <input type="text" id="email" name="email" placeholder="Email" autofocus class="form-control" required tabIndex="1">
+                                </div>
+                                <div class="form-group">
+                                                {#<label for="password">{% trans %}Password{% endtrans %}:</label><BR>#}
+                                        <input type="password" id="password" name="password" placeholder="Password" class="form-control" required tabindex="2">
+                                </div>
+                                <div class="m-3 justify-content-center" style="text-align: center;">
+                                    <a href="{{ baseUri }}/customer/recover-password" tabIndex="4" class="h6 login-forget-password">
+                                        Esqueceu-se da Palavra-passe?
+                                    </a>
+                                </div>
+
+                            <div class='d-felx justify-content-center'>
+                                    <center><input type="submit" id="form_customer_login_submit" value="{% trans %}Enter{% endtrans %}" data-loading-text="{% trans %}Loading{% endtrans %}"  class="login-btn-entrar" tabindex="3">
+                                   </center>
+                            </div>
+                                <br>
+                                <hr>
+                                <br>
+                            <div class='h4 first-title-login'>
+                                    Cliente Novo
+                            </div>
+                            <div class='h6 login-info-new-client'>
+                                    Criar uma conta traz muitos benefícios: check-out mais rápido, manter mais de um endereço, rastrear pedidos e muito mais.
+                            </div>
+                                <br>
+                            <div class="login-btn-criar-conta">
+                                  
+                                    <a  href="{{ baseUri }}/customer/signup">Criar Conta</a>
+                                  
+                            </div>
+
+                                                            {#<div class="form-group text-center text-red">
+                                                                <a href="{{ baseUri }}/customer/recover-password" tabIndex="4">{% trans %}Recover Password{% endtrans %}</a>
+                                                            </div>#}
+                                                            {#<div class="d-flex justify-content-between">
+                                                                <span class="mt-2"><a href="{{ baseUri }}/customer/signup" class="btn btn-outline-secondary btn-sm" tabIndex="5">{% trans %}Do not have an account? Sign up!{% endtrans %}</a></span>
+                                                                <input type="submit" id="form_customer_login_submit" value="{% trans %}Enter{% endtrans %}" data-loading-text="{% trans %}Loading{% endtrans %}" class="btn btn-primary btn-form-action" tabIndex="3">
+                                                            </div>#}
+                    </form>
+                </div>
+            </div>
+        
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            var options = {
+            };
+            querybizCustomer.init(options);
+        });
+    </script>
+
+    <script src="https://www.google.com/recaptcha/api.js?render={{ LayoutFunctions.getSettingsVars('GOOGLE_CAPTCHA_PUBLIC_KEY_V3') }}"></script>
+    <script>
+        grecaptcha.ready(function() {
+            grecaptcha.execute('{{ LayoutFunctions.getSettingsVars('GOOGLE_CAPTCHA_PUBLIC_KEY_V3') }}', { action: 'validate_captcha' }).then(function(token) {
+                document.getElementById('g-recaptcha-response').value = token;
+            });
+        });
+    </script>
+{% endblock %}

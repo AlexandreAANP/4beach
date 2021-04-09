@@ -1,0 +1,115 @@
+{% extends 'base.html.twig' %}
+
+{% block metatag_description %}{% trans %}Product Cart{% endtrans %}{% endblock %}
+
+{% block body %}
+    {{ include('_includes/breadcrumb.html.twig', {
+        'path': [
+            {'product-cart': 'Cart'}
+        ]
+    })}}
+
+    <div class="container mb-5">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <div class="cart-box">
+                    {% set totalProductItems = 0 %}
+                    {% set isAllowedQuantity = false %}
+
+                    {% if (product.listProductItemStock is defined) and (product.listProductItemStock|length > 0) %}
+                        {% set productQuantity = product.productQuantity %}
+                        {% set productPriceQuantity = product.productPriceQuantity %}
+                        {% set productPrice = product.productPrice %}
+
+                        {% set totalProductItems = product.listProductItemStock|length %}
+
+                        {% for key,item in product.listProductItemStock %}
+                            <div class="order-product order-product-inner">
+                                <div class="row w-100 flex-lg-nowrap align-items-center">
+                                    <div class="col">
+                                        <div class="order-image large mx-auto" style="background-image: url('{{ item.filename }}');"></div>
+                                    </div>
+                                    <div class="col flex-fill order-info">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h1 class="order-info-title">{{ item.name }}</h1>
+                                                {% if item.productTypeReferenceKey == 'physical-products' %}
+                                                    <span class="order-info-subtitle">{% trans %}Color{% endtrans %}: {{ product.productItems[item.productItemStockId].color }} | {% trans %}Size{% endtrans %}: {{ product.productItems[item.productItemStockId].size }}</span>
+                                                {% endif %}
+                                            </div>
+                                            <div class="col-12 mt-3 d-flex align-items-center">
+                                                <span class="order-info-price text-nowrap">{{ productPrice[item.productItemStockId] }} €</span>
+                                                <span class="order-info-quantity">
+                                                    {% if item.allowQuantity %}
+                                                        {% set isAllowedQuantity = true %}
+                                                        {% trans %}Quantity{% endtrans %}
+                                                        {% if item.productTypeReferenceKey == 'physical-products' %}
+                                                            <input type="text" class="form-control squared-form cart-products-quantity" data-product-item-stock-id="{{ item.productItemStockId }}" data-product-id="{{ item.productId }}" data-value="{{ productQuantity[item.productItemStockId] }}" value="{{ productQuantity[item.productItemStockId] }}" style="text-align: center">
+                                                        {% else %}
+                                                            <button class="btn btn-outline-primary">{% trans %}Availability{% endtrans %}</button>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+                                            <div class="col-12 mt-3 d-flex align-items-center justify-content-between">
+                                                <span class="order-info-delivery-date">{#Entrega entre 3-4 Dias#}</span>
+                                                <a href="#" value="{{ item.productItemStockId }}" class="order-info-link btn-del-product-cart" data-productid="{{ item.productItemStockId }}" data-redirect="{{ baseUri }}/addProductToCart">
+                                                    <i class="mdi mdi-trash-can"></i>
+                                                    {% trans %}Remove{% endtrans %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="d-flex flex-column flex-md-row align-items-center justify-content-end p-18">
+                        {% if isAllowedQuantity %}
+                            <a href="#" id="btn_cart_products_quantity_update" data-loading-text="{% trans %}Updating{% endtrans %}" class="clean-btn">{% trans %}Update Stock{% endtrans %}</a>
+                        {% endif %}
+                        <a href="{{ baseUri }}/product/physical-products" class="clean-btn">{% trans %}Keep buying{% endtrans %}</a>
+                        <a href="{{ baseUri }}/checkout" class="secondary-btn">{% trans %}Checkout{% endtrans %}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <ul class="list-group">
+                    <li class="list-group-item header">Detalhes do Valor</li>
+                    <li class="list-group-item">
+                        {% trans %}Price{% endtrans %} ({{ totalProductItems }} {% trans %}Items{% endtrans %})
+                        <span>{{ product.totalPrice }} €</span>
+                    </li>
+                    {#
+                    <li class="list-group-item">
+                        Portes de Envio
+                        <span>10 €</span>
+                    </li>
+                    #}
+                    <li class="list-group-item footer">
+                        {% trans %}Total{% endtrans %}
+                        <span>{{ product.totalPrice }} €</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            var options = {
+            };
+            querybizProduct.init(options);
+
+            querybizProduct.delProductFromCart();
+            querybizProduct.listenerBtnCartProductQuantityUpdate();
+
+            /*querybizProduct.getProductInCart('cart'); // Call data from Route and put in <div id="product-cart-content">  */
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+
+{% include 'header.html.twig' %}
+
+<body>
+{% if app.request.cookies.has('cookie-consent-' ~ appVersionCookiePolicy) %}
+    {% include '_includes/gtm_body.html.twig' %}
+{% endif %}
+
+{% block javascripts %}
+    <script>
+        var arDefaultOptions = [];
+        arDefaultOptions['countryBaseIso'] = '{{ LayoutFunctions.getEnvVars('BASE_COUNTRY_ISO2') }}';
+        arDefaultOptions['countryBaseId'] = '{{ LayoutFunctions.getEnvVars('BASE_COUNTRY_ID') }}';
+
+        arDefaultOptions['baseUri'] = '{{ baseUri }}';
+        arDefaultOptions['apiUrl'] = '{{ apiUrl }}';
+        arDefaultOptions['cdnUrl'] = '{{ cdnUrl }}';
+        arDefaultOptions['requestUri'] = '{{ app.request.requestUri()  }}';
+        arDefaultOptions['requestUriB64'] = '{{ LayoutFunctions.base64_encode(app.request.requestUri()) }}';
+
+        var defaultIsDev = {{ LayoutFunctions.isDev(app.request) ? 'true' : 'false' }};
+    </script>
+
+    <script>
+        jQuery(document).ready(function($) {
+            $('.dropdown-collection').click(function () {
+                $('.dropdown-collection-list').fadeToggle();
+            });
+
+            $('.dropdown-language').click(function () {
+                $('.dropdown-lang-list').fadeToggle();
+            });
+
+            $('.dropdown-currency').click(function () {
+                $('.dropdown-currency-list').fadeToggle();
+            });
+        });
+    </script>
+{% endblock %}
+
+{% include 'menu.html.twig' %}
+
+{% block body %}{% endblock %}
+
+{% include 'footer.html.twig' %}
+
+{% if '.ibiz.pt' in LayoutFunctions.getEnvVars('DOMAIN_NAME') %}
+    <div style="position: fixed; background-color: #fff; border-top: #ccc 2px solid; bottom: 0; width: 100%; color: #000; text-align: center; padding: 6px; font-weight: bold; z-index: 99999">This is a <a href="https://umbraco.com/about-us/umbraco-dictionary/staging-environment" target="_blank" style="color: #000" title="What is a Staging Environment?">Staging Environment</a> - {{ LayoutFunctions.getEnvVars('SITE_URL') }}</div>
+{% endif %}
+
+</body>
+</html>
