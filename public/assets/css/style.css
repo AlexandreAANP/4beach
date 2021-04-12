@@ -101,9 +101,9 @@ input.transparent-input:focus{
 	background-color:#F4F5F8;
 	border-radius: 60px;
 	border:1px solid #E3E5EE;
-	width:60%;
-	padding-top: 7%;
-	padding-bottom: 7%;
+	width:50%;
+	padding-top: 15px;
+	padding-bottom: 15px;
 
 }
 
