@@ -68,27 +68,27 @@
                         {% if isAllowedQuantity %}
                             <a href="#" id="btn_cart_products_quantity_update" data-loading-text="{% trans %}Updating{% endtrans %}" class="clean-btn">{% trans %}Update Stock{% endtrans %}</a>
                         {% endif %}
-                        <a href="{{ baseUri }}/product/physical-products" class="clean-btn">{% trans %}Keep buying{% endtrans %}</a>
-                        <a href="{{ baseUri }}/checkout" class="secondary-btn">{% trans %}Checkout{% endtrans %}</a>
+                        <a href="{{ baseUri }}/product/physical-products" class="blue-color mr-3">{% trans %}Keep buying{% endtrans %}</a>
+                        <a href="{{ baseUri }}/checkout" class="secondary-btn contact-btn-send m-0">{% trans %}Checkout{% endtrans %}</a>
                     </div>
                 </div>
             </div>
             <div class="col-12 col-lg-4">
                 <ul class="list-group">
-                    <li class="list-group-item header">Detalhes do Valor</li>
+                    <li class="list-group-item header cart-datails-value">Detalhes do Valor</li>
                     <li class="list-group-item">
                         {% trans %}Price{% endtrans %} ({{ totalProductItems }} {% trans %}Items{% endtrans %})
-                        <span>{{ product.totalPrice }} €</span>
+                        <span class="blue-color">{{ product.totalPrice }} €</span>
                     </li>
                     {#
                     <li class="list-group-item">
                         Portes de Envio
-                        <span>10 €</span>
+                        <span class="blue-color">10 €</span>
                     </li>
                     #}
-                    <li class="list-group-item footer">
+                    <li class="list-group-item footer  blue-color">
                         {% trans %}Total{% endtrans %}
-                        <span>{{ product.totalPrice }} €</span>
+                        <span class="blue-color">{{ product.totalPrice }} €</span>
                     </li>
                 </ul>
             </div>

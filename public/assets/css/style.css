@@ -334,3 +334,11 @@ font-family: "Roboto", sans-serif;
     font-weight: 600 !important;
     text-transform: uppercase !important;
 	}
+	.cart-datails-value{
+		background-color: #d21113 !important;
+    	font-size: 15px !important;
+    	font-weight: 500 !important;
+	}
+	.blue-color{
+		color: #1b3c7e!important;
+	}
