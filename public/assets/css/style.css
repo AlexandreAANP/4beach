@@ -110,7 +110,7 @@ input.transparent-input:focus{
 .first-title-login{
 	padding-top: 2vh;
 	font-family: 'Roboto', sans-serif;
-	/*font-size: 21px;*/
+	font-size: 21px;
 	text-align: center;
 	color:#1B3C7E;
 	font-weight: 500;
@@ -119,7 +119,7 @@ input.transparent-input:focus{
 }
 .second-title-login{
 	font-family: 'Roboto', sans-serif;
-	/*font-size: 17px;*/
+	font-size: 17px;
 	text-align: center;
 	color:#1B3C7E;
 	margin:15px;
@@ -128,7 +128,7 @@ input.transparent-input:focus{
 }
 .info-frase-login{
 	font-family: 'Roboto', sans-serif;
-	/*font-size: 12px;*/
+	font-size: 12px;
 	text-align: center;
 	color: #727272;
 	margin:20px;
@@ -211,9 +211,9 @@ font-family: "Roboto", sans-serif;
 	
 	}
 .background-section-image{
-	/*padding-top: 100px;
-	padding-bottom: 100px;*/
-	padding: 100px;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	/*padding: 100px;*/
 	background-image: url('/assets/images/BG-mar.png');
 	background-size: cover;
 }
@@ -240,3 +240,97 @@ font-family: "Roboto", sans-serif;
   
 
 }
+.contact-label-input{
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	color: #747474;
+}
+
+.contact-btn-send{
+
+	cursor:pointer;
+font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  color: white;
+  line-height: 1;
+  font-weight: bold;
+  background-color: #1b3c7e;
+  border: 0;
+  padding: 0 35px;
+  width: auto;
+  height: 37px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  text-align: center; 
+  margin-bottom: 3vh;
+}
+  .contact-btn-send:not(.squared-btn) {
+    border-radius: calc(37px / 2); }
+  .contact-btn-send:hover, .contact-btn-send:active {
+    text-decoration: none; 
+	color: rgba(255,255,255,0.8);
+	
+	}
+	.contact-info-contacts{
+		background-color:#FFFFFF;
+		border:1px solid #D2D2D2; 
+	}
+	.contact-round-icon{
+		width: 50px;
+		height: 50px;
+		border-radius: 100%;
+		background-color: blue;
+	}
+	.contact-icon-background{
+		color: #1b3c7e;
+		border: #ECECEC;
+	}
+	.contact-icon-color{
+		color:white;
+	}
+	.contact-info-destaque{
+		color: #1B3C7E;
+    font-size: 13pt;
+    font-weight: 500;
+	}
+	.contact-input {
+
+	color: #1b3c7e;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: none;
+	}
+	.contact-input::placeholder {
+		color: #1b3c7e;
+    font-size: 15px;
+    font-weight: 500;
+	}
+	.contact-input:focus{
+		color: #1b3c7e;
+    font-size: 15px;
+    font-weight: 500;
+	}
+	.contact-text-title{
+		font-size: 17px;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 600;
+		color: #1b3c7e;
+	}
+	.contact-text-subtitle{
+		font-size: 14px;
+		font-family: 'Roboto', sans-serif;
+		font-weight: 400;
+		color: #606060;
+	}
+	.products-bradcrumb-firsttitle{
+		    background-color: #1c3b7e !important;
+   			font-weight: 600 !important;
+    		font-size: 19px !important;
+	}
+	.products-bradcrumb-category{
+		color: #1c3b7e !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+	}

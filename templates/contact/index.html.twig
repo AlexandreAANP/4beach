@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <section class="section-min-height">
+    <section class="background-section-image">
 
-        <div class="container mb-5">
-            {% set arContent = LayoutFunctions.getAPI('content/pages-contact-us?language=' ~ app.request.getLocale()) %}
+        <div class="container mb-4">
+            {#{% set arContent = LayoutFunctions.getAPI('content/pages-contact-us?language=' ~ app.request.getLocale()) %}
             {% if arContent is defined and arContent is iterable and arContent|length > 0%}
                 {% if arContent.title is defined and arContent.title != '' %}
                     <h1>{{ arContent.title }}</h1>
@@ -15,23 +15,31 @@
                 {% endif %}
             {% else %}
                 <h1 class="text-center my-3">{% trans %}CONTACT{% endtrans %}</h1>
-            {% endif %}
+            {% endif %}#}
+            <input placeholder="Pesquisa" class="form-control" type="text" name="pesquisa">
         </div>
 
         <div class="container">
+            <div class="row">
             {% set varNameFormTemplateEmail = 'contact' %}
             <div id="form_{{ varNameFormTemplateEmail }}_sendmail_template_sent" class="shadow p-2" style="display: none">
                 <button type="button" id="form_{{ varNameFormTemplateEmail }}_sendmail_template_form_back" class="close"><span aria-hidden="true">&times;</span></button>
                 <strong>{% trans %}Email has sent successfully{% endtrans %}!</strong><br>{% trans %}Thank you for contacting us{% endtrans %}!
             </div>
 
+
+        <div class="col-md-6">
+              <div class="col-md-12">
+                <h3 class="contact-text-title">Deixe uma Mensagem</h3>
+                <p class="contact-text-subtitle">Ao contrário da crença popular, Lorem Ipsum não é simplesmente um texto aleatório. Tem raízes em uma peça da literatura clássica latina de 45 aC.</p>
+            </div>
             <form id="form_{{ varNameFormTemplateEmail }}_sendmail_template" class="sendmail-template" action="/sendmailTemplate" method="POST" novalidate>
                 <input type="hidden" name="content_email_template" value="emailtemplate-{{ varNameFormTemplateEmail }}">
                 <input type="hidden" name="content_email_template_table" value="{{ varNameFormTemplateEmail }}">
                 <input type="hidden" name="date_inserted" value="{{ 'now'|date('d/m/Y H:i:s') }}">
                 <input type="hidden" name="customer_id" value="{{ customerId }}">
 
-                {% if colContactForms.checkout is defined and colContactForms.checkout|length > 0 %}
+                {% if not (colContactForms.checkout is defined and colContactForms.checkout|length > 0) %}
                     {% set colAdditionalFields = colContactForms %}
                     {% set fieldPrefix = '' %}
                     {% set fieldExcluded = ['customer_id', 'date_inserted'] %}
@@ -39,43 +47,90 @@
 
                 {% else %}
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6 ">
                             <div class="md-form mb-0">
-                                <label for="name" class="font-weight-bold" style="color:#182752">{% trans %}Your name{% endtrans %}</label>
-                                <input type="text" id="name" name="name" class="form-control" autofocus required2>
+                                <label for="name" class="contact-label-input">{% trans %}Name{% endtrans %}</label>
+                                <input type="text" id="name" name="name" class="form-control rounded-0 contact-input" autofocus required2>
                                 <div class="invalid-feedback">{% trans %}Opss ... this field is required!{% endtrans %}</div>
                             </div>
                         </div>
 
                         <div class="col-md-6">
                             <div class="md-form mb-0">
-                                <label for="email" class="font-weight-bold" style="color:#182752">{% trans %}Your email{% endtrans %}</label>
-                                <input type="email" id="email" name="email" class="form-control" required2>
+                                <label for="email" class="contact-label-input">{% trans %}Your email{% endtrans %}</label>
+                                <input type="email" id="email" name="email" class="form-control rounded-0 contact-input" required2>
                                 <div class="invalid-feedback">{% trans %}Opsss ... this field is required!{% endtrans %}</div>
                             </div>
                         </div>
-                    </div>
+                
 
-                    <div class="row mt-4">
-                        <div class="col-md-12">
+                    <div class="col-md-12 mt-4">
                             <div class="md-form">
-                                <label for="message" class="font-weight-bold" style="color:#182752">{% trans %}Your message{% endtrans %}</label>
-                                <textarea type="text" id="message" name="message" rows="4" class="form-control md-textarea" required2></textarea>
+                                <label for="message" class="contact-label-input">{% trans %}Your message{% endtrans %}</label>
+                                <textarea type="text" id="message" name="message" rows="4" class="form-control md-textarea rounded-0 contact-input" required2></textarea>
                                 <div class="invalid-feedback">{% trans %}Opsss ... this field is required!{% endtrans %}</div>
                             </div>
-                        </div>
                     </div>
+                
                 {% endif %}
 
-                <div class="d-flex w-100 mt-3 justify-content-between">
-                    <div class="mt-2" id="recaptcha_html_element"></div>
-                    <div>
-                        <input type="submit" id="form_{{ varNameFormTemplateEmail }}_sendmail_template_submit" value="{% trans %}Send{% endtrans %}" class="btn btn-outline-info" data-loading-text="{% trans %}Sending{% endtrans %}">
+                {#<div class="d-flex w-100 mt-3 justify-content-between">#}
+                    {#<div class="mt-2" id="recaptcha_html_element"></div>#}
+                    <div class="col-md-6 mt-4">
+                        
+                        <input type="submit" id="form_{{ varNameFormTemplateEmail }}_sendmail_template_submit" value="{% trans %}Send{% endtrans %}" class="contact-btn-send" data-loading-text="{% trans %}Sending{% endtrans %}">
                     </div>
                 </div>
+                {#</div>#}
             </form>
 
-            <h2 class="h1-responsive font-weight-bold text-center my-4" style="color:#182752">{% trans %}Other ways to contact us{% endtrans %}</h2>
+        </div>
+
+        <div class="col-md-6">
+            <div class="ml-2 contact-info-contacts">
+            <div class="row">
+            <ol>
+
+                {% if LayoutFunctions.getLayoutVars('PAGE_CONTACT_EMAIL') != '' %}
+                <li class="row mt-5">
+                <div class="col-3">
+                    <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x contact-icon-background"></i>
+                      <i class="fas fa-envelope fa-stack-1x contact-icon-color"></i>
+                    </span>
+                </div>
+                <div class='col-9 mt-2' style="padding-left: 60px;">Email<br><span class="contact-info-destaque">{{ LayoutFunctions.getLayoutVars('PAGE_CONTACT_EMAIL') }}</span></div>
+                </li>
+                {% endif %}
+                
+                {% if LayoutFunctions.getLayoutVars('PAGE_CONTACT_PHONE') != '' %}
+                <li class="row mt-5">
+                <div class="col-3">
+                    <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x contact-icon-background"></i>
+                      <i class="fas fa-phone fa-stack-1x contact-icon-color"></i>
+                    </span>
+                </div>
+                <div class='col-9 mt-2' style="padding-left: 60px;">{% trans %}Phone{% endtrans %}<br><span class="contact-info-destaque">{{ LayoutFunctions.getLayoutVars('PAGE_CONTACT_PHONE') }}</span></div>
+                </li>
+                {% endif %}
+
+                 {% if LayoutFunctions.getLayoutVars('PAGE_CONTACT_PHONE') != '' %}
+                <li class="row mt-5">
+                <div class="col-3">
+                    <span class="fa-stack fa-2x">
+                      <i class="fa fa-circle fa-stack-2x contact-icon-background"></i>
+                      <i class="fas fa-map-marker-alt fa-stack-1x contact-icon-color"></i>
+                    </span>
+                </div>
+                <div class='col-9 mt-2' style="padding-left: 60px;">{% trans %}Adress{% endtrans %}<br><span class="contact-info-destaque">{{ LayoutFunctions.getLayoutVars('PAGE_CONTACT_ADRESS') }}</span></div>
+                </li>
+                {% endif %}
+
+            </ol>
+            </div>
+
+            {#<h2 class="h1-responsive font-weight-bold text-center my-4" style="color:#182752">{% trans %}Other ways to contact us{% endtrans %}</h2>
 
             <div class="d-block text-center my-5">
                 <div class="d-inline-block m-2">
@@ -92,9 +147,14 @@
                     <i class="fas fa-envelope m-2 fa-2x" style="color:#182752"></i>
                     <p>{{ LayoutFunctions.getLayoutVars('PAGE_CONTACT_EMAIL') }}</p>
                 </div>
+            </div>#}
+
+            </div>
             </div>
 
         </div>
+        </div>
+
     </section>
 {% endblock %}
 
