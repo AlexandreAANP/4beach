@@ -342,3 +342,9 @@ font-family: "Roboto", sans-serif;
 	.blue-color{
 		color: #1b3c7e!important;
 	}
+	.products-slider-container-controls{
+		display: none !important;
+	}
+	.products-slider-container-controls:first-of-type{
+		display: inherit !important;
+	}

@@ -1,3 +1,6 @@
+
+
+
 var querybiz = {
 	CONST_baseUri: '',
 	CONST_apiUrl: '',
@@ -16,7 +19,12 @@ var querybiz = {
 
 // ########### SweetAlert2 Icons: success: error, warning, info, question ################ //
 
+
+
+
 	init: function(options) {
+
+
 		querybiz.CONST_baseUri = options.hasOwnProperty('baseUri') ? options.baseUri : '';
 		querybiz.CONST_apiUrl = options.hasOwnProperty('apiUrl') ? options.apiUrl : '';
 		querybiz.CONST_cdnUrl = options.hasOwnProperty('cdnUrl') ? options.cdnUrl : '';
@@ -294,7 +302,25 @@ var querybiz = {
 				});
 			}
 		});
+	
+		$('.mdi-chevron-left').click(function() {
+			$(".mdi-chevron-left").each(function(e){
+			if(e>0){
+				$(this).parent().trigger('click');
+			}
+		});
 
+		});		
+		$('.mdi-chevron-right').click(function() {
+			$(".mdi-chevron-right").each(function(e){
+			if(e>0){
+				$(this).parent().trigger('click');
+			}
+		});
+			
+		});
+
+		
 		$('.btn-modal-product-stock-zero').click(function() {
 			alert('sem estoque');
 		});

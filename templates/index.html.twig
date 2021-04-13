@@ -31,13 +31,21 @@
         <div class="container">
             <div class="row">
                 {% if colProductHighlighted['physical-products'] is defined and colProductHighlighted['physical-products']|length > 0 %}
-                    <div class="col-12 positive-z-index">
+                   
+                    <div class="col-12 m-5 positive-z-index">
+                        
                         <div class="products-slider-top">
-                            <h1>{% trans %}Highlighted{% endtrans %}</h1>
+                       
+                            <h1>{% trans %}Highlighted {% endtrans %}</h1>
+                         
                         </div>
+                        
+                        {% for i in 0..3 %}
                         <div class="products-slider">
-
+                       
                             {% for product in colProductHighlighted['physical-products'] %}
+                            {% set number = colProductHighlighted['physical-products']|length/4 %}
+                            {{ dump(number) }}
                                 <div>
                                     {{ include('_render_block/product-card-rounded.html.twig', {
                                         'baseUri': baseUri,
@@ -45,13 +53,18 @@
                                     }) }}
                                 </div>
                             {% endfor %}
+                        
                         </div>
+                        {% endfor %}
+                        
                     </div>
+                
+               
                 {% endif %}
             </div>
         </div>
         <br><br>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 {% if colProductCategoryHighlighted is defined and colProductCategoryHighlighted|length > 0 %}
                 <div class="col-12 positive-z-index">
