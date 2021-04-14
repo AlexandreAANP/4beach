@@ -39,20 +39,95 @@
                             <h1>{% trans %}Highlighted {% endtrans %}</h1>
                          
                         </div>
+
+                        {% set numberProducts = colProductHighlighted['physical-products']|length %}
+
+
+                        {%set start = 0%}
+                        {%set lenght = 4 %}
+
+
+                        {% set numberRowsProducts = colProductHighlighted['physical-products']|length/4 %}
+
+                        {% if  numberRowsProducts != numberRowsProducts|number_format %}
+                            {% set numberRowsProducts = numberRowsProducts|number_format +1 %}
+                        {% else %}
+                            {% set numberRowsProducts = numberRowsProducts|number_format %}
+                        {% endif %}
+
+                        {%if numberRowsProducts>3%}
+                                {%set numberRowsProducts = 3%}
+                        {%endif%}
+
+                        {%set numberDivisions = colProductHighlighted['physical-products']|length/12 %}
                         
-                        {% for i in 0..3 %}
+                        {%if  numberDivisions != numberDivisions|number_format%}
+                            {% set numberDivisions = numberDivisions|number_format +1 %}
+                        {%else%}
+                            {% set numberDivisions = numberDivisions|number_format %}
+                        {%endif%}
+                            
+                        {% for i in 1..numberRowsProducts %}
                         <div class="products-slider">
-                       
-                            {% for product in colProductHighlighted['physical-products'] %}
-                            {% set number = colProductHighlighted['physical-products']|length/4 %}
-                            {{ dump(number) }}
+
+                                {%for o in 0..numberDivisions%}
+                                    {%for product in colProductHighlighted['physical-products']|slice(start+12*o, lenght)%}
+
+                                     <div id='aqui'>
+                                  
+                                    {{ include('_render_block/product-card-rounded.html.twig', {
+                                        'baseUri': baseUri,
+                                        'product': product,
+                                    }) }}
+                                </div>
+                                    {%endfor%}
+                                {%endfor%}
+                            
+
+                            {%set start = start + 4%}
+
+
+
+
+
+
+
+
+
+
+
+                            {# last code
+                            {% set o = 0%}
+                            {% for product in colProductHighlighted['physical-products']%}
+                            {% if not break %}
+
+                                <div id='aqui'>
+                                    {{ include('_render_block/product-card-rounded.html.twig', {
+                                        'baseUri': baseUri,
+                                        'product': product,
+                                    }) }}
+                                </div>
+
+                                {%if o>2%}
+                                    {%set break=true%}
+                                {% endif%}
+                                {% set o = o+1 %}
+                            {% endif %}
+                            {% endfor %}
+                                #}
+
+                            {#% for product in colProductHighlighted['physical-products'] %}
+                            
+                            
                                 <div>
                                     {{ include('_render_block/product-card-rounded.html.twig', {
                                         'baseUri': baseUri,
                                         'product': product,
                                     }) }}
                                 </div>
-                            {% endfor %}
+                            {% endfor %#}
+
+
                         
                         </div>
                         {% endfor %}
