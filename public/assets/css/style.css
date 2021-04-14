@@ -211,11 +211,10 @@ font-family: "Roboto", sans-serif;
 	
 	}
 .background-section-image{
-	padding-top: 50px;
-	padding-bottom: 50px;
-	/*padding: 100px;*/
-	background-image: url('/assets/images/BG-mar.png');
-	background-size: cover;
+		background-image: url('/assets/images/BG-mar.png');
+	background-size:100%;
+    background-position:bottom;
+    background-repeat: no-repeat;
 }
 .costumer-checkradio-Newsletter span{
 	font-family: 'Roboto', sans-serif;

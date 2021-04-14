@@ -303,22 +303,32 @@ var querybiz = {
 			}
 		});
 	
-		$('.mdi-chevron-left').click(function() {
+
+		$('.mdi-chevron-left').click(function(e) {
+			
 			$(".mdi-chevron-left").each(function(e){
-			if(e>0){
+			if(e>0 && e!= $('.mdi-chevron-left').length-1 ){
 				$(this).parent().trigger('click');
 			}
+
+		
+			
 		});
 
-		});		
+		});	
+
 		$('.mdi-chevron-right').click(function() {
 			$(".mdi-chevron-right").each(function(e){
-			if(e>0){
+			if(e>0 && e != $('.mdi-chevron-right').length-1){
 				$(this).parent().trigger('click');
 			}
 		});
 			
 		});
+
+		$('.category').children().children().children().off("click");
+		
+
 
 		
 		$('.btn-modal-product-stock-zero').click(function() {

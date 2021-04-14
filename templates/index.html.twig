@@ -32,7 +32,7 @@
             <div class="row">
                 {% if colProductHighlighted['physical-products'] is defined and colProductHighlighted['physical-products']|length > 0 %}
                    
-                    <div class="col-12 m-5 positive-z-index">
+                    <div class="col-12 positive-z-index">
                         
                         <div class="products-slider-top">
                        
@@ -68,6 +68,7 @@
                         {%endif%}
                             
                         {% for i in 1..numberRowsProducts %}
+
                         <div class="products-slider">
 
                                 {%for o in 0..numberDivisions%}
@@ -130,6 +131,7 @@
 
                         
                         </div>
+                        <br><br><br>
                         {% endfor %}
                         
                     </div>
@@ -143,8 +145,8 @@
             <div class="row">
                 {% if colProductCategoryHighlighted is defined and colProductCategoryHighlighted|length > 0 %}
                 <div class="col-12 positive-z-index">
-                    <div class="products-slider-top">
-                            <h1>{% trans %}Highlighted{% endtrans %}</h1>
+                    <div class="products-slider-top category" >
+                            <h1>{% trans %}Categories{% endtrans %}</h1>
                     </div>
                     <div class='products-slider'>
                     {% for productCategoryHighlighted in colProductCategoryHighlighted %}
