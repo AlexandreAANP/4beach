@@ -111,6 +111,12 @@ input.transparent-input:focus{
   .background-login {
   	width:90%;
   }
+  .background-section-image{
+  	background-size: 200% 35% !important;
+  }
+  .contact-contactos-info{
+  	padding-left: 30px !important;
+  }
 }
 
 
@@ -360,4 +366,25 @@ font-family: "Roboto", sans-serif;
 	}
 	.products-slider-container-controls:first-of-type{
 		display: inherit !important;
+	}
+
+
+
+
+ .products-card-rounded .products-card-overflowed{
+    	visibility:hidden !important;
+  
+    }
+	.products-card.raise .products-card-overflowed {
+		visibility: visible !important;
+		box-shadow: none !important;
+	}
+	.products-card-overflowed {
+		background-color: transparent !important;
+	}
+	.products-card-wrapper{
+		   background: transparent !important;
+	}
+	.products-card.raise {
+		box-shadow: none !important;
 	}
