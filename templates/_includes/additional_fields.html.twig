@@ -7,8 +7,8 @@
                     {% if field.type != '' %}
 
                         {% if field.type != 'hidden' %}
-                            <div class="{% if divOptions.class is defined %} {{ divOptions.class }} {% else %}mb-3{% endif %}" style="{% if divOptions.style is defined %} {{ divOptions.style }} {% endif %}">
-                            <label for="{{ fieldPrefix }}-{{field.field}}" class="mb-0 font-weight-bold">
+                            <div class="{% if divOptions.class is defined %} {{ divOptions.class }} {% else %}col-12{% endif %}" style="{% if divOptions.style is defined %} {{ divOptions.style }} {% endif %}">
+                            <label for="{{ fieldPrefix }}-{{field.field}}" class="mb-0 font-weight-bold contact-label-input">
                                 {% if field.required != '' %}* {% endif %}
                                 {{field.placeholder}}:
                             </label>
@@ -48,7 +48,7 @@
                                 {% set fieldType = field.type %}
                             {% endif %}
 
-                            <input type="{{ fieldType }}" class="form-control" id="additional_fields_{{ fieldPrefix ? fieldPrefix ~ '_' : '' }}{{field.field}}" name="additional_fields[{{ fieldPrefix }}{{field.field}}]" placeholder="{{field.placeholder}}" {{ extraAttrib }} {{field.required}} >
+                            <input type="{{ fieldType }}" class="form-control  contact-input" id="additional_fields_{{ fieldPrefix ? fieldPrefix ~ '_' : '' }}{{field.field}}" name="additional_fields[{{ fieldPrefix }}{{field.field}}]" placeholder="{{field.placeholder}}" {{ extraAttrib }} {{field.required}} >
 
                         {% elseif field.type == 'radiobox'  %}
 
@@ -94,7 +94,7 @@
                             </select>
 
                         {% elseif field.type == 'text'  %}
-                            <textarea id="additional_fields_{{ fieldPrefix ? fieldPrefix ~ '_' : '' }}{{field.field}}" name="additional_fields[{{ fieldPrefix }}{{field.field}}]" placeholder="{{field.placeholder}}"  class="form-control" rows="3" {{field.required}}></textarea>
+                            <textarea id="additional_fields_{{ fieldPrefix ? fieldPrefix ~ '_' : '' }}{{field.field}}" name="additional_fields[{{ fieldPrefix }}{{field.field}}]" placeholder="{{field.placeholder}}"  class="form-control  contact-input" rows="3" {{field.required}}></textarea>
 
                         {% endif %}
 

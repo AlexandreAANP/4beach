@@ -107,6 +107,16 @@ input.transparent-input:focus{
 
 }
 
+@media only screen and (max-width: 600px) {
+  .background-login {
+  	width:90%;
+  }
+}
+
+
+
+
+
 .first-title-login{
 	padding-top: 2vh;
 	font-family: 'Roboto', sans-serif;
@@ -212,7 +222,7 @@ font-family: "Roboto", sans-serif;
 	}
 .background-section-image{
 		background-image: url('/assets/images/BG-mar.png');
-	background-size:100%;
+	background-size:100% 65%;
     background-position:bottom;
     background-repeat: no-repeat;
 }
@@ -238,6 +248,10 @@ font-family: "Roboto", sans-serif;
     text-align: center;
   
 
+}
+.contact-container-principal{
+	/*padding-top: 100px;*/
+	padding-bottom: 100px;
 }
 .contact-label-input{
 	font-family: 'Roboto', sans-serif;
@@ -297,7 +311,7 @@ font-family: "Roboto", sans-serif;
 	.contact-input {
 
 	color: #1b3c7e;
-    font-size: 15px;
+    font-size: 20px !important;
     font-weight: 500;
     border-radius: none;
 	}

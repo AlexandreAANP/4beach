@@ -5,7 +5,7 @@
     
     {% include '_includes/modal_product_color_size.html.twig' %}
 
-    <section class="pt-5 pb-5 background-section-image">
+    <section class="pt-5 pb-5 background-section-image" style="background-size: 100% 40%;">
 
         <div class="container text-center mb-5">
             {% set colContentHomeInstitucional = LayoutFunctions.getContentGroup('content?area=content-area-home-institucional&fields=area,url', 'area') %}
@@ -102,7 +102,7 @@
                             {% for product in colProductHighlighted['physical-products']%}
                             {% if not break %}
 
-                                <div id='aqui'>
+                                <div>
                                     {{ include('_render_block/product-card-rounded.html.twig', {
                                         'baseUri': baseUri,
                                         'product': product,
