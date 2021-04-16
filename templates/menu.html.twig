@@ -68,11 +68,17 @@
         </a>
         <ul id="menu-links" class="list-unstyled d-flex flex-column flex-fill w-100">
             {% include '_render_block/menu-links.html.twig' %}
+            <li>
+                    <a href="{{ baseUri }}/product-cart" class="nav-link nav-link-warning" data-loading-text="{% trans %}Cart{% endtrans %} ({{ productItemsInCart }})">
+                        <i class="mdi mdi-cart"></i>
+                        <span class="warning">{{ productItemsInCart ?? 0 }}</span>
+                    </a>
+            </li>
         </ul>
 
-        <div class="d-flex align-items-center justify-content-between w-100 pr-1 pl-1">
+        {#<div class="d-flex align-items-center justify-content-between w-100 pr-1 pl-1">
             {% include '_render_block/menu-links.html.twig' %}
-        </div>
+        </div>#}
     </div>
 </nav>
 

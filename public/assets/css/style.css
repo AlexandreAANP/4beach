@@ -388,3 +388,15 @@ font-family: "Roboto", sans-serif;
 	.products-card.raise {
 		box-shadow: none !important;
 	}
+
+	.paginator-select-page{
+		color: white !important;
+		background-color: #D21113;
+		border:none;
+	}
+	.paginator-select-page:hover{
+		background-color: red;
+	}
+	.page-link .paginator-btn-ant-seg{
+		border: 20px !important;
+	}

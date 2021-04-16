@@ -18,23 +18,67 @@
             {% endif %}
 
             {% if (arPagination.currentPage is defined) and (arPagination.currentPage > 1) %}
-                <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage - 1) }}" class="page-link"><i class='fas fa-angle-left'></i></a></li>
+                <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage - 1) }}" class="page-link paginator-btn-ant-seg">{#<i class='fas fa-angle-left'></i>#}Ant</a></li>
             {% endif %}
 
             {% for key in 1..arPagination.pages %}
                 {% if key == arPagination.currentPage %}
+
+
+                    {% if key == arPagination.pages %}
+                    {% set totalpages = 0 %}
+                        
+                            {% for i in arPagination.pages-4..arPagination.pages-1 %}
+                                {% if totalpages < 4 and i > 0 %}
+                                <li class='page-item'>
+                                    <a href="{{ baseUri }}/product/{{ productType }}/{{ i }}" class = 'page-link'>
+                                        {{i}}
+                                    </a>
+                                </li>
+                                {% set totalpages = totalpages + 1 %}
+                                {% endif %}
+                                
+
+                            {% endfor %}
+                            
+                        
+                    {% endif %}
+
+
                     {% set current = 'active' %}
                     <li class="page-item">
-                        <a href="{{ baseUri }}/product/{{ productType }}/{{ key }}" class="{{ current }} page-link">
-                            {% if (arPagination.currentPage is defined) and (arPagination.currentPage > 0) %} {{ key }} {% else %} 1 {% endif %} {% trans %}of{% endtrans %} {{ arPagination.pages }}
+                        <a href="{{ baseUri }}/product/{{ productType }}/{{ key }}" class="{{ current }} page-link paginator-select-page">
+                            {% if (arPagination.currentPage is defined) and (arPagination.currentPage > 0) %} {{ key }} {% else %} 1 {% endif %} {#{% trans %}of{% endtrans %} {{ arPagination.pages }}#}
                         </a>
                     </li>
+                    
+                    {% if key < arPagination.pages %}
+                    
+                    {% set totalpages = 0 %}
+                    {%for i in key+1..arPagination.pages %}
+                        {% if totalpages < 4 %}
+                        <li class='page-item'>
+                            <a href="{{ baseUri }}/product/{{ productType }}/{{ i }}" class = 'page-link'>
+                                {{i}}
+                            </a>
+                        </li>
+                        {% set totalpages = totalpages + 1 %}
+                        {% endif %}
+                    
+                    {% endfor %}
+                    {% endif %}
+
+
+
+
+
+
                 {% endif %}
             {% endfor %}
 
             <li class="page-item">
                 {% if (arPagination.currentPage is defined) and (arPagination.currentPage < arPagination.pages) %}
-            <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage + 1) }}" class="page-link"><i class='fas fa-angle-right'></i></a></li>
+            <li class="page-item"><a href="{{ baseUri }}/product/{{ productType }}/{{ (arPagination.currentPage + 1) }}" class="page-link paginator-btn-ant-seg">Seg{#<i class='fas fa-angle-right'></i>#}</a></li>
                 {% endif %}
 
                 {% if (arPagination.currentPage is defined) and (arPagination.currentPage < arPagination.pages) %}

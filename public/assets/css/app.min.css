@@ -7854,7 +7854,7 @@ select.form-control {
     color: #343232;
     line-height: 1;
     font-weight: 400;
-    border-radius: 50% !important;
+    border-radius: 20px /*!important*/;
     text-align: center;
     margin-right: 2.5px;
     margin-left: 2.5px; }
