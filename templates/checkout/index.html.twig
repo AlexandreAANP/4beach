@@ -7,10 +7,10 @@
         <input type="hidden" name="is_frontoffice_cart" value='true'>
         <input type="hidden" id="checkout_customer_invoice_id" name="customer_invoice_id">
         <section>
-            <div class="container mb-0">
+            {#<div class="container mb-0">
                 <h2 class="h1-responsive font-weight-bold text-center mt-4 mb-0">{% trans %}CHECKOUT{% endtrans %}</h2>
                 <p class="text-center w-responsive mx-auto mb-3">Check your products and choose the payment method</p>
-            </div>
+            </div>#}
             <div class="container mt-0">
                 <div id="product_cart_items_loading" class="p-5 text-center">
                     <div class="spinner-border" role="status">
@@ -18,7 +18,319 @@
                     </div>
                 </div>
 
+
+            <div class='row pt-5'>
+                <div class="col-8">
+                    <div class="row my-2 py-1 checkout-header-point d-flex align-items-center">
+                        <div class="col-1">
+                        <b><span class='checkout-span-circle-number blue-color'>1</span></b>
+                        </div>
+                        <div class="col-10 pl-1">
+                        <b><p class="blue-color my-0"> Morada de Entrega</p></b>
+                        </div>
+                        <div class="col-1 text-right">
+                            <i class="checkout-btn-plus-address blue-color mdi mdi-minus btn"></i>
+                        </div>
+
+                        <!--BODY-->
+                        <div class='body-morada-entrega container'>
+                        {% if enableAddressOnCheckout %}
+                            {% for address in customerAddress%}
+                        <div class="container mx-2 py-2 bg-red checkout-default-address-background">
+                            <div class="row">
+                                <span class="col-9 checkout-default-address-tittle">Enviar para esta morada</span>
+                                <span class="col-3 checkout-default-address-btns">
+                                    <a ><i class="mdi mdi-18px mdi-pencil blue-color"></i> Editar </a>
+                                    <a><i class="mdi mdi-18px mdi-trash-can-outline blue-color"></i> Remover </a>
+                                </span>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="radio" name="" class="mr-2"><span class='checkout-default-address-nome'>{{customerName}}</span>
+                                    <p class="checkout-default-address pl-4">
+                                        
+                                        {% if address.line1|length %}
+                                            {{address.line1}},
+                                        {% endif %}
+                                        {% if address.line2|length %}
+                                            {{address.line2}},
+                                        {% endif %}
+                                        {% if address.postalCode|length %}
+                                            {{address.postalCode}},
+                                        {% endif %}
+                                        {% if address.city|length %}
+                                            {{address.city}},
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                            {% endfor %}
+                        {% endif %}
+
+                        <div class="container py-3 form-group">
+                            <div class="row py-2">
+                                <div class="col-6">
+                                    <input class='form-control' type="text" name="nome" placeholder="Nome">
+                                </div>
+                                
+                                <div class="col-6">
+                                    <input class='form-control' type="text" name="nome" placeholder="Sobrenome">
+                                </div>
+                            </div>
+                             <div class="row py-2">
+                                <div class="col-6">
+                                    <input class='form-control' type="mail" name="nome" placeholder="Email">
+                                </div>
+                                
+                                <div class="col-6">
+                                    <input class='form-control' type="number" name="nome" placeholder="Número de Telemóvel">
+                                </div>
+                            </div>
+
+                            <div class="row py-2">
+                                <div class="col-12">
+                                <textarea class='form-control' placeholder="Morada" rows='5'></textarea>
+                                </div>
+                            </div>
+
+                            <div class="row py-2">
+                                <div class="col-6">
+                                    <select class="form-control" placeHolder='Cidade'>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <input class="form-control" type="text" name="" placeholder="Código-Postal">
+                                </div>
+                            </div>
+
+                             <div class="row py-2">
+                                <div class="col-6">
+                                    <select class="form-control" placeholder='Cidade'>
+                                        <option></option>
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                 <select class="form-control" placeholder='Cidade'>
+                                        <option></option>
+                                </select>
+                                </div>
+                            </div>
+                            </div>
+                                <div class="row py-4 d-flex justify-content-end col">
+                                        <a class="btn contact-btn-send mb-0" style="font-size: 13px;">SALVAR ESTA MORADA E CONTINUAR</a>
+
+                                </div>
+                        
+                        </div>
+                        <!--/BODY-->
+                    </div>
+
+                     <div class="row my-2 py-1 checkout-header-point d-flex align-items-center">
+                        <div class="col-1">
+                            <b><span class='checkout-span-circle-number blue-color'>2</span></b>
+                        </div>
+                        <div class="col-10 pl-1">
+                            <b><p class="blue-color my-0">Produtos Relacionados</p></b>
+                        </div>
+                        <div class="col-1 text-right">
+                            <i class="checkout-btn-plus-more-products blue-color mdi mdi-plus btn"></i>
+                        </div>
+
+                        <!--BODY-->
+                        <div class='body-produtos-relacionados container'>
+                            <div class="row py-2 ">
+                                <span class="col-12 pb-2">Recomendados</span>
+                                
+                            <div class="col-12">
+                                <div class="mx-1 p-0 pb-1 overflow-auto container row flex-nowrap checkout-scrollbar">
+
+                                <div class="col-5">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                  <div class="col-5">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+
+
+
+
+
+                            <div class="row py-2">
+                                <span class="col-12 pb-2">Sugeridos</span>
+
+
+
+
+                                 <div class="col-12">
+                                <div class="mx-1 p-0 pb-1 overflow-auto container row flex-nowrap checkout-scrollbar">
+
+                                <div class="col-5">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-5">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                  <div class="col-5">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                           <div class="row py-4 d-flex justify-content-end border-top">
+                                    <div class="mr-5">
+                                        <a class="btn contact-btn-send mb-0" style="font-size: 13px;">CONTINUAR</a>
+                                    </div>
+                            </div>
+                        </div>
+                        <!--/BODY-->
+                    </div>
+
+
+                {#    
                 <div id="product_cart_items" style="display: none">
+
+
                     {% if (product.listProductItemStock is defined) and (product.listProductItemStock|length > 0) %}
                         <div class="row bg-light border p-2 mb-2">
                             <div class="col h5 product-cart-title-line-1 px-0 text-center">{% trans %}Image{% endtrans %}</div>
@@ -110,9 +422,37 @@
                         </tr>
                         </tbody>
                     {% endif %}
-                </div>
+                </div>#}
 
-                <div class="pb-4 mb-4">
+
+
+            </div>
+
+            <div class="col-4">
+            {% if (product.listProductItemStock is defined) and (product.listProductItemStock|length > 0) %}
+                {% set totalProductItems = product.listProductItemStock|length %}
+                <ul class="list-group">
+                    <li class="list-group-item header cart-datails-value">Detalhes do Valor</li>
+                    <li class="list-group-item">
+                        {% trans %}Price{% endtrans %} ({{ totalProductItems }} {% trans %}Items{% endtrans %})
+                        <span class="blue-color">{{ product.totalPrice }} €</span>
+                    </li>
+                    {#
+                    <li class="list-group-item">
+                        Portes de Envio
+                        <span class="blue-color">10 €</span>
+                    </li>
+                    #}
+                    <li class="list-group-item footer  blue-color">
+                        {% trans %}Total{% endtrans %}
+                        <span class="blue-color">{{ product.totalPrice }} €</span>
+                    </li>
+                </ul>
+            {% endif %}
+            </div>
+            </div>
+
+                {#<div class="pb-4 mb-4">
                     <div class="d-flex justify-content-end align-items-center">
                         <a href="{{ baseUri }}/product-cart" style="border:#ff5a2c solid 3px; color:#ff5a2c; background: transparent" data-loading-text="Backing" class="btn mx-3">{% trans %}Back to Cart{% endtrans %}</a>
 
@@ -123,11 +463,11 @@
                             <input type="hidden" id="total_products_price" name="total_products_price" value="{{ totalProductsPrice }}">
                         </div>
                     </div>
-                </div>
+                </div>#}
             </div>
         </section>
 
-        <section class="container">
+       {# <section class="container">
             <div class="d-block w-100">
                 <ul class="nav nav-tabs float-right" id="checkoutTab" role="tablist">
                     {% set activeInvoice = '' %}
@@ -366,7 +706,7 @@
 
                     {# END OF INVOICE ONE - START INVOICE MULTIPLE #}
 
-                    {% if LayoutFunctions.getEnvVars('SHOW_CHECKOUT_INVOICE_MULTIPLE') == 'true' %}
+                   {# {% if LayoutFunctions.getEnvVars('SHOW_CHECKOUT_INVOICE_MULTIPLE') == 'true' %}
                         <div class="tab-pane fade" id="invoice_multiple" role="tabpanel" aria-labelledby="invoice-multiple-tab">
                             <div class="container mb-4">
                                 <div class="row">
@@ -504,7 +844,7 @@
                     {% endif %}
                 {% endif %}
             </div>
-        </section>
+        </section>#}
     </form>
 
     <section>
@@ -545,6 +885,43 @@
 {% block javascripts %}
 
     {{ parent() }}
+    
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.checkout-btn-plus-address').click(function(){
+                if(!$('.body-morada-entrega').is(':visible')){
+                    $('.checkout-btn-plus-address').removeClass('mdi-plus');
+                    $('.checkout-btn-plus-address').addClass('mdi-minus');
+                    $('.body-morada-entrega').slideDown('slow');
+                   
+                }
+                else{
+                    $('.checkout-btn-plus-address').removeClass('mdi-minus');
+                    $('.checkout-btn-plus-address').addClass('mdi-plus');
+                    $('.body-morada-entrega').slideUp('slow');
+                   
+                }
+            });
+
+             $('.checkout-btn-plus-more-products').click(function(){
+                if(!$('.body-produtos-relacionados').is(':visible')){
+                    $('.checkout-btn-plus-more-products').removeClass('mdi-plus');
+                    $('.checkout-btn-plus-more-products').addClass('mdi-minus');
+                    $('.body-produtos-relacionados').slideDown('slow');
+                   
+                }
+                else{
+                    $('.checkout-btn-plus-more-products').removeClass('mdi-minus');
+                    $('.checkout-btn-plus-more-products').addClass('mdi-plus');
+                    $('.body-produtos-relacionados').slideUp('slow');
+                   
+                }
+            });
+        });
+
+    </script>
+    
 
     <script>
         $(document).ready(function() {

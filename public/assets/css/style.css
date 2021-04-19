@@ -400,3 +400,70 @@ font-family: "Roboto", sans-serif;
 	.page-link .paginator-btn-ant-seg{
 		border: 20px !important;
 	}
+	.checkout-span-circle-number{
+		display: inline-block;
+	    border: 1px solid #c1c1c1;
+	    border-radius: 50%;
+	    width: 2rem !important;
+	    height: 2rem !important;
+	    text-align: center;
+	    font-size: 19px;
+	}
+
+	.checkout-header-point{
+		border: 1px solid #c1c1c1;
+		border-radius: 15px;
+	}
+	.checkout-default-address-background{
+		background-color: #F1F1F1;
+    	border-radius: 15px;
+	}
+	.checkout-default-address-tittle{
+		font-family: 'Roboto', sans-serif;
+		font-size: 13px;
+		color: #6E6E6E;
+	}
+	.checkout-default-address-btns{
+		font-family: 'Roboto', sans-serif;
+		font-size: 12px;
+		color: #3C3B3B;
+	}
+	.checkout-default-address-nome{
+		font-weight: bold;
+		font-family: 'Roboto', sans-serif;
+		font-size: 13px;
+		color: #1B3C7E;
+	}
+	.checkout-default-address{
+		font-family: 'Roboto', sans-serif;
+		font-size: 14px;
+		color: #1B3C7E;
+	}
+	.checkout-img-other-products{
+		height: 84px;
+    background-size: cover;
+    width: 84px;
+    background-position: center;
+	}
+
+
+	.checkout-scrollbar::-webkit-scrollbar{
+		height: 5px;
+	}
+	.checkout-scrollbar::-webkit-scrollbar-track{
+		background-color: #F1F1F1;
+		border-radius: 15px;
+	}
+
+	/* Handle */
+.checkout-scrollbar::-webkit-scrollbar-thumb {
+  background: #c1c1c1; 
+}
+
+/* Handle on hover */
+.checkout-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8; 
+}
+.body-produtos-relacionados{
+	display:none;
+}

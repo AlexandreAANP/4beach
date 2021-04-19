@@ -63,8 +63,8 @@
 <li class='WithHover'><a href="{{ baseUri }}/contact" title="{% trans %}Contact{% endtrans %}">{% trans %}Contact{% endtrans %}</a></li>
 
 {% if customerId is defined and customerId > 0 %}
-    <li class="pl-4">
-        <a href="{{ baseUri }}/customer" class="btn btn-secondary text-white">{% trans %}Customer Area{% endtrans %}</a>
+    <li class="WithHover">
+        <a href="{{ baseUri }}/customer" class="{#btn btn-secondary text-white}#}">{% trans %}Customer Area{% endtrans %}</a>
     </li>
 {% else %}
     <li class="pl-4">
