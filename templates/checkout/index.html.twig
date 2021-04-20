@@ -98,7 +98,7 @@
                             <div class="row py-2">
                                 <div class="col-6">
                                     <select class="form-control" placeHolder='Cidade'>
-                                        <option></option>
+                                        <option value="" disabled selected hidden>Cidade</option>
                                     </select>
                                 </div>
                                 <div class="col-6">
@@ -108,13 +108,13 @@
 
                              <div class="row py-2">
                                 <div class="col-6">
-                                    <select class="form-control" placeholder='Cidade'>
-                                        <option></option>
+                                    <select class="form-control" >
+                                       <option value="" disabled selected hidden>Estado</option>
                                     </select>
                                 </div>
                                 <div class="col-6">
                                  <select class="form-control" placeholder='Cidade'>
-                                        <option></option>
+                                        <option value="" disabled selected hidden>País</option>
                                 </select>
                                 </div>
                             </div>
@@ -317,7 +317,7 @@
                             </div>
                             </div>
 
-                           <div class="row py-4 d-flex justify-content-end border-top">
+                           <div class="row py-3 d-flex justify-content-end border-top">
                                     <div class="mr-5">
                                         <a class="btn contact-btn-send mb-0" style="font-size: 13px;">CONTINUAR</a>
                                     </div>
@@ -327,6 +327,262 @@
                     </div>
 
 
+
+
+
+
+                      <div class="row my-2 py-1 checkout-header-point d-flex align-items-center">
+                        <div class="col-1">
+                            <b><span class='checkout-span-circle-number blue-color'>3</span></b>
+                        </div>
+                        <div class="col-10 pl-1">
+                            <b><p class="blue-color my-0">Método de Pagamento</p></b>
+                        </div>
+                        <div class="col-1 text-right">
+                            <i class="checkout-btn-plus-metodo-pagamento blue-color mdi mdi-plus btn"></i>
+                        </div>
+
+                        <!--BODY-->
+
+                        {# {% if listPaymentGateway|length %}
+                        <div class="row justify-content-center">
+                            {% for paymentGateway in listPaymentGateway %}
+                                <div class="card border-0 m-2 text-center" style="min-width: 180px">
+                                    {% if paymentGateway.referenceKey == 'payment_gateway_none' or paymentGateway.referenceKey == 'payment_gateway_check_availability' %}
+                                        <button data-gateway="{{baseUri}}{{ paymentGateway.link }}" class="btn btn-dark text-white btn-checkout-gateway" style="width: 100%; font-size: 20px; padding: 15px 10px; font-weight: bold; white-space: nowrap">
+                                            {{ paymentGateway.name }}
+                                        </button>
+                                    {% else %}
+                                        <button data-gateway="{{baseUri}}{{baseUri}}{{ paymentGateway.link }}" class="btn btn-dark btn-checkout-gateway" style="width: 100%">
+                                            <i class="fab {{ paymentGateway.icon}} fa-3x text-white"></i>
+                                        </button>
+                                        <span class="small">Pagar com <strong>{{ paymentGateway.name }}</strong></span>
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}#}
+
+
+
+                        <div class='body-metodo-pagamento container'>
+                            <div class="container">
+                                <div class="row py-3">
+                                    <div class="col-6">
+                                    {% if listPaymentGateway|length %}
+                                        {% for paymentGateway in listPaymentGateway %}
+
+                                            {% if paymentGateway.referenceKey == 'payment_gateway_none' or paymentGateway.referenceKey == 'payment_gateway_check_availability' %}
+                                                 <button data-gateway="{{baseUri}}{{ paymentGateway.link }}"  class="btn btn-light border">  {{ paymentGateway.name }} </button>
+                                            {% else %}
+                                                <button class="mx-2 checkout-btns-met-pagamentos"  data-gateway="{{baseUri}}{{baseUri}}{{ paymentGateway.link }}"><i class="fab {{ paymentGateway.icon}}"></i></button>
+                                                <button class="mx-2 checkout-btns-met-pagamentos"  data-gateway="{{baseUri}}{{baseUri}}{{ paymentGateway.link }}"><i class="fab {{ paymentGateway.icon}}"></i></button>
+                                                <button class="mx-2 checkout-btns-met-pagamentos"  data-gateway="{{baseUri}}{{baseUri}}{{ paymentGateway.link }}"><i class="fab {{ paymentGateway.icon}}"></i></button>
+                                                <button class="mx-2 checkout-btns-met-pagamentos"  data-gateway="{{baseUri}}{{baseUri}}{{ paymentGateway.link }}"><i class="fab {{ paymentGateway.icon}}"></i></button>
+                                            {% endif %}
+
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+                                    <div class="col-6">
+                                        <button class="mx-2 checkout-btns-discount">Pontos</button>
+                                        <button class="mx-2 checkout-btns-discount">Tokens</button>
+                                        <button class="mx-2 checkout-btns-discount">Saldos e Descontos</button>
+                                    </div>
+                                </div>
+
+                                <div class="row py-2">
+                                    <span><input class='checkout-radio-red' type="radio" name=""> Cartão de crédito</span>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6 mb-5">
+                                        <div class="row py-1">
+                                            <label class="col checkout-met-pagamento-label"> Número de cartão de crédito</label>
+                                            <input class='form-control  rounded-0' type="number" name="">
+                                        </div>
+                                        <div class="row d-flex justify-content-between">
+                                            <div class="col">
+                                                <label class="checkout-met-pagamento-label">Data de Exposição</label>
+                                                <div class="row">
+                                                <select class="col-6 form-control rounded-0">
+                                                   <option value="" disabled selected hidden>Mês</option>                                                
+                                               </select>
+
+                                                <select class="col-6 form-control  rounded-0">
+                                                    <option value="" disabled selected hidden>Ano</option>   
+                                                </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-3">
+                                                <label class="checkout-met-pagamento-label  ">CVV</label>
+                                                <input class="form-control rounded-0" type="text" name="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="row py-4 border-top">
+                                <div class="col">
+                                <span><input type="radio" name=""> Receber em dinheiro</span>
+                                </div>
+                            </div>
+                            <div class="row py-3 d-flex justify-content-end border-top">
+                                    <div class="mr-5">
+                                        <a class="btn contact-btn-send mb-0" style="font-size: 13px;">CONTINUAR</a>
+                                    </div>
+                            </div>
+                        </div> 
+                        <!--/BODY-->
+                    </div>
+
+
+
+
+
+                    <div class="row my-2 py-1 checkout-header-point d-flex align-items-center">
+                        <div class="col-1">
+                            <b><span class='checkout-span-circle-number blue-color'>4</span></b>
+                        </div>
+                        <div class="col-10 pl-1">
+                            <b><p class="blue-color my-0">Revisão da Encomenda</p></b>
+                        </div>
+                        <div class="col-1 text-right">
+                            <i class="checkout-btn-revisao-encomenda blue-color mdi mdi-plus btn"></i>
+                        </div>
+
+                        <!--BODY-->
+                        <div class="body-revisao-encomenda container">
+                            <div class="py-4 col-12">
+                                        <div class="row w-100 flex-lg-nowrap align-items-center">
+                                                <div class="col">
+                                                    <div class="order-image large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756e263002b.jpg');"></div>
+                                                </div>
+                                                <div class="col flex-fill order-info">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h1 class="order-info-title blue-color font-weight-bold">Anfora</h1>
+                                                                                                                <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                                                                        </div>
+                                                        <div class="col-12 mt-3 d-flex align-items-center">
+                                                            <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                            <span class="order-info-quantity blue-color">
+
+                                                                                                                </span>
+                                                        </div>
+                                                        <div class="col-12 mt-3 d-flex align-items-center justify-content-between">
+                                                            <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span>
+                                                            <a href="#" value="110" class="order-info-link btn-del-product-cart" data-productid="110" data-redirect="/addProductToCart">
+                                                                <i class="mdi mdi-trash-can blue-color"></i>
+                                                                Remove                                                </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                           
+                                        </div>
+                                    
+                                        <div class="row w-100 flex-lg-nowrap align-items-center">
+                                                <div class="col">
+                                                    <div class="order-image large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756e263002b.jpg');"></div>
+                                                </div>
+                                                <div class="col flex-fill order-info">
+                                                    <div class="row">
+                                                        <div class="col-12">
+                                                            <h1 class="order-info-title blue-color font-weight-bold">Anfora</h1>
+                                                                                                                <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                                                                        </div>
+                                                        <div class="col-12 mt-3 d-flex align-items-center">
+                                                            <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                            <span class="order-info-quantity blue-color">
+
+                                                                                                                </span>
+                                                        </div>
+                                                        <div class="col-12 mt-3 d-flex align-items-center justify-content-between">
+                                                            <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span>
+                                                            <a href="#" value="110" class="order-info-link btn-del-product-cart" data-productid="110" data-redirect="/addProductToCart">
+                                                                <i class="mdi mdi-trash-can blue-color"></i>
+                                                                Remove                                                </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                           
+                                        </div>
+
+                            </div>
+
+
+                            <div class="row py-3 border-top">
+                                <div class="container">
+                                <div class="col-12 py-2">
+                                <span>Extras</span>
+                                </div>
+                                <div class="col-6">
+                                    <div class="row flex-lg-nowrap">
+                                        <div class="col">
+                                            <div class="checkout-img-other-products large mx-auto" style="background-image: url('http://backoffice.test/data/product/60756ee9df7c9.jpg');"></div>
+                                        </div>
+                                        <div class="col flex-fill order-info mb-0">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <h1 class="order-info-title blue-color font-weight-bold">Cheesecake morango</h1>
+                                                    <span class="order-info-subtitle">Color: Unique | Size: Unique</span>
+                                                </div>
+                                                <div class="col-12 d-flex align-items-center">
+                                                    <span class="order-info-price text-nowrap blue-color">10 €</span>
+                                                    <span class="order-info-quantity blue-color">
+
+                                                                                                        </span>
+                                                </div>
+                                                <div class="col-12 mt-1 d-flex align-items-center justify-content-between" style="font-size: 12px;">
+                                                    <span class="order-info-delivery-date">Entrega entre 3-4 Dias</span><span class='order-info-link btn-del-product-cart'>+ Adicionar</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row py-3 border-top border-bottom d-flex align-items-center">
+                                <div class="col-6">
+                                    <label>Introduza o código de Cupão</label>
+                                    <div class="row container">
+                                    <input class='col-8 form-control rounded-0' type="text" name="">
+                                    <a class="col-4 btn checkout-btn-cupao">APLICAR</a>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class=" d-flex justify-content-between">
+                                        <span class='checkout-final-price-label'>Valor</span>
+                                        <span class="checkout-final-price-label2">623 €</span>
+                                    </div>
+                                    <div class=" d-flex justify-content-between">
+                                        <span class="checkout-final-price-label">Portes de envio</span>
+                                        <span class="checkout-final-price-label2">10 €</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row pt-3 pb-5 d-flex justify-content-end">
+                                <div  class="col-6 d-flex justify-content-between">
+                                    <span class="checkout-final-price-label2">Total da Encomenda</span>
+                                    <span class="checkout-final-price-label2">633 €</span>
+                                </div>
+                            </div>
+
+                              <div class="row py-3  pt-5 d-flex justify-content-end border-top">
+                                    <div class="mr-5">
+                                        <a class="btn contact-btn-send mb-0" style="font-size: 13px;">CONTINUAR</a>
+                                    </div>
+                            </div>
+                        </div>
+                        <!--/BODY-->
+                    </div>
                 {#    
                 <div id="product_cart_items" style="display: none">
 
@@ -847,7 +1103,7 @@
         </section>#}
     </form>
 
-    <section>
+    {#<section>
         <div class="container" style="margin-bottom: 100px">
             <div class="row">
                 <div class="bg-light w-100 my-2 p-1 pt-2 border rounded text-center">
@@ -858,6 +1114,7 @@
             </div>
             <div>
                 <div class="row d-block text-center">
+                    {{dump(listPaymentGateway)}}
                     {% if listPaymentGateway|length %}
                         <div class="row justify-content-center">
                             {% for paymentGateway in listPaymentGateway %}
@@ -879,7 +1136,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>#}
 {% endblock %}
 
 {% block javascripts %}
@@ -918,6 +1175,36 @@
                    
                 }
             });
+
+              $('.checkout-btn-plus-metodo-pagamento').click(function(){
+                if(!$('.body-metodo-pagamento').is(':visible')){
+                    $('.checkout-btn-plus-metodo-pagamento').removeClass('mdi-plus');
+                    $('.checkout-btn-plus-metodo-pagamento').addClass('mdi-minus');
+                    $('.body-metodo-pagamento').slideDown('slow');
+                   
+                }
+                else{
+                    $('.checkout-btn-plus-metodo-pagamento').removeClass('mdi-minus');
+                    $('.checkout-btn-plus-metodo-pagamento').addClass('mdi-plus');
+                    $('.body-metodo-pagamento').slideUp('slow');
+                   
+                }
+            });
+
+              $('.checkout-btn-revisao-encomenda').click(function(){
+                if(!$('.body-revisao-encomenda').is(':visible')){
+                    $('.checkout-btn-revisao-encomenda').removeClass('mdi-plus');
+                    $('.checkout-btn-revisao-encomenda').addClass('mdi-minus');
+                    $('.body-revisao-encomenda').slideDown('slow');
+                   
+                }
+                else{
+                    $('.checkout-btn-revisao-encomenda').removeClass('mdi-minus');
+                    $('.checkout-btn-revisao-encomenda').addClass('mdi-plus');
+                    $('.body-revisao-encomenda').slideUp('slow');
+                   
+                }
+            }); 
         });
 
     </script>

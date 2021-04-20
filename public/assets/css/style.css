@@ -467,3 +467,52 @@ font-family: "Roboto", sans-serif;
 .body-produtos-relacionados{
 	display:none;
 }
+.checkout-btns-met-pagamentos{
+	width: auto;
+    height: 30px;
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+    background-color: transparent;
+}
+.checkout-btns-discount {
+	font-weight: 500;
+	font-size: 7px;
+	width: auto;
+    height: 30px;
+    border: 1px solid #c1c1c1;
+    border-radius: 5px;
+    background-color: transparent;
+}
+.checkout-met-pagamento-label{
+	font-weight: 400 !important;
+    color: #1b3c7e;
+}
+.checkout-radio-red input[type='radio']:checked{
+	background-color: red;
+}
+.body-metodo-pagamento{
+	display: none;
+}
+.checkout-btn-cupao{
+	font-weight: 600;
+	background-color: #1B3C7E;
+	color: white;
+}
+.checkout-btn-cupao:hover{
+	color: rgba(255,255,255,0.8) !important;
+
+}
+
+.checkout-final-price-label{	
+    color: #787878;
+    font-size: 15px;
+    font-weight: 500;
+
+}
+.checkout-final-price-label2{
+	    color: #1B3C7E;
+    font-weight: 600;
+}
+.body-revisao-encomenda{
+	display: none;
+}
