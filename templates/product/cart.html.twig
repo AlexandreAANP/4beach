@@ -3,16 +3,17 @@
 {% block metatag_description %}{% trans %}Product Cart{% endtrans %}{% endblock %}
 
 {% block body %}
+    <section class="background-section-image">
     {{ include('_includes/breadcrumb.html.twig', {
         'path': [
             {'product-cart': 'Cart'}
         ]
     })}}
 
-    <div class="container mb-5">
+    <div class="container">
         <div class="row">
             <div class="col-12 col-lg-8">
-                <div class="cart-box">
+                <div class="cart-box bg-light">
                     {% set totalProductItems = 0 %}
                     {% set isAllowedQuantity = false %}
                        
@@ -96,6 +97,54 @@
         </div>
     </div>
 
+
+     <div class="container">
+                <div class="row py-5">
+        
+                <div class="col-12 positive-z-index">
+                    <div class="products-slider-top category" >
+                            <h1 class='container'>{% trans %}Produtos Relacionados{% endtrans %}</h1>
+                    </div>
+                    <div class='products-slider'>
+                        {% for i in 0..5 %}
+                        <div class="products-card products-card-rounded mb-4">
+                                <!--<div class="products-tag green-tag">Novo</div>-->
+                            <div class="products-card-wrapper2">
+                                <!--
+                                <div class="products-card-share">
+                                    <a href="#"><i class="mdi mdi-compare-horizontal"></i></a>
+                                    <a href="#"><i class="mdi mdi-heart-outline"></i></a>
+                                </div>
+                                -->
+                                <a href="/product-gelado-de-cafe"><div class="products-card-image" style="background-image: url('http://backoffice.test/data/product/60756fa69cdd4.jpg')"></div></a>
+                                <a href="#" class="products-card-name">Gelado de Café</a>
+                                <div class="products-card-values">
+                                    <!--<span class="products-card-values-replaced"> €</span>-->
+                                    <span class="products-card-values-original">5.25 €</span>
+                                </div>
+                            </div>
+
+                            <div class="products-card-overflowed">
+                                                                
+                                
+                                <div>
+                                    <!--<p>Localização</p>-->
+                                    <button class="secondary-btn btn-add-product-cart" data-product-id="168" data-product-item-stock-id="" data-redirect="/addProductToCart">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    </div>
+            
+              </div>
+            </div>
+            </div>
+
+
+
+
+
+    </section>
 {% endblock %}
 
 {% block javascripts %}

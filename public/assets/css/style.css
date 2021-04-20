@@ -411,8 +411,9 @@ font-family: "Roboto", sans-serif;
 	}
 
 	.checkout-header-point{
+		background-color: white;
 		border: 1px solid #c1c1c1;
-		border-radius: 15px;
+		border-radius: 30px;
 	}
 	.checkout-default-address-background{
 		background-color: #F1F1F1;
@@ -515,4 +516,8 @@ font-family: "Roboto", sans-serif;
 }
 .body-revisao-encomenda{
 	display: none;
+}
+.products-card-wrapper2{
+	background-color: white !important;
+	border-radius:25px;
 }
